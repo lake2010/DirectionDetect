@@ -45,6 +45,12 @@
     <ClInclude Include="Resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="StudyDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MfcHalcon.h">
+      <Filter>halcon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectionDetect.cpp">
@@ -61,6 +67,12 @@
     </ClCompile>
     <ClCompile Include="DirectionDetectView.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="StudyDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MfcHalcon.cpp">
+      <Filter>halcon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

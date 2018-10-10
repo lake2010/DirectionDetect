@@ -250,6 +250,16 @@ BEGIN
     DEFPUSHBUTTON   "确定",IDOK,113,41,50,14,WS_GROUP
 END
 
+IDD_STUDY DIALOGEX 0, 0, 647, 302
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION
+CAPTION "Study"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,468,164,50,14
+    PUSHBUTTON      "取消",IDCANCEL,535,164,50,14
+    PUSHBUTTON      "打开图片",IDC_OPEN_PIC,447,21,62,23
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -305,8 +315,27 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 55
     END
+
+    IDD_STUDY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 640
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 295
+    END
 END
 #endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_STUDY AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
 
 
 /////////////////////////////////////////////////////////////////////////////

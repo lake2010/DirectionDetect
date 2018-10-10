@@ -33,6 +33,7 @@ public:
 #endif
 
 protected:
+	LONG64 g_hMainViewWindowID;							//主界面halcon window ID
 
 // 生成的消息映射函数
 protected:

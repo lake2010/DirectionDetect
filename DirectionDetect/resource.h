@@ -31,6 +31,9 @@
 #define IDS_EDIT_MENU                   306
 #define IDI_OPEN                        311
 #define IDI_OPENED                      312
+#define IDD_STUDY                       315
+#define IDC_BUTTON1                     1000
+#define IDC_OPEN_PIC                    1000
 #define ID_EDIT_STUDY                   32771
 #define ID_32772                        32772
 #define ID_32773                        32773
@@ -41,9 +44,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        315
+#define _APS_NEXT_RESOURCE_VALUE        317
 #define _APS_NEXT_COMMAND_VALUE         32776
-#define _APS_NEXT_CONTROL_VALUE         1000
+#define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif
