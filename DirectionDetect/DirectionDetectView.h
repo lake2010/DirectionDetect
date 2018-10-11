@@ -33,7 +33,8 @@ public:
 #endif
 
 protected:
-	LONG64 g_hMainViewWindowID;							//主界面halcon window ID
+public:
+	LONG64 m_hMainViewWindowID;							//主界面halcon window ID
 
 // 生成的消息映射函数
 protected:
@@ -41,6 +42,13 @@ protected:
 	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	DECLARE_MESSAGE_MAP()
+public://菜单栏、工具栏事件响应函数
+	//开始检测
+	afx_msg void OnCmdStart();
+	//停止检测
+	afx_msg void OnCmdStop();
+	//打开学习对话框
+	afx_msg void OnEditStudy();
 };
 
 #ifndef _DEBUG  // DirectionDetectView.cpp 中的调试版本

@@ -11,6 +11,8 @@
 
 #include "DirectionDetectDoc.h"
 #include "DirectionDetectView.h"
+#include "StudyDlg.h"
+#include "MfcHalcon.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -24,6 +26,9 @@ IMPLEMENT_DYNCREATE(CDirectionDetectView, CView)
 BEGIN_MESSAGE_MAP(CDirectionDetectView, CView)
 	ON_WM_CONTEXTMENU()
 	ON_WM_RBUTTONUP()
+	ON_COMMAND(ID_CMD_START, &CDirectionDetectView::OnCmdStart)
+	ON_COMMAND(ID_CMD_STOP, &CDirectionDetectView::OnCmdStop)
+	ON_COMMAND(ID_EDIT_STUDY, &CDirectionDetectView::OnEditStudy)
 END_MESSAGE_MAP()
 
 // CDirectionDetectView 构造/析构
@@ -42,6 +47,7 @@ BOOL CDirectionDetectView::PreCreateWindow(CREATESTRUCT& cs)
 {
 	// TODO: 在此处通过修改
 	//  CREATESTRUCT cs 来修改窗口类或样式
+
 
 	return CView::PreCreateWindow(cs);
 }
@@ -94,3 +100,31 @@ CDirectionDetectDoc* CDirectionDetectView::GetDocument() const // 非调试版本是内
 
 
 // CDirectionDetectView 消息处理程序
+
+
+void CDirectionDetectView::OnCmdStart()
+{
+	// TODO: 在此添加命令处理程序代码
+	/*
+	初始化
+	创建工作线程
+	*/
+	HANDLE handle;
+	//handle = (HANDLE)_beginthreadex(NULL, 0, gWorkThreadFun, NULL, 0, NULL);
+
+	return;
+}
+
+
+void CDirectionDetectView::OnCmdStop()
+{
+	// TODO: 在此添加命令处理程序代码
+}
+
+
+void CDirectionDetectView::OnEditStudy()
+{
+	// TODO: 在此添加命令处理程序代码
+	CStudyDlg studyDlg;
+	studyDlg.DoModal();
+}

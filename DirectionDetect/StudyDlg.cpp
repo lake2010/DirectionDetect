@@ -52,21 +52,25 @@ BOOL CStudyDlg::OnInitDialog()
 void CStudyDlg::OnClickedOpenPic()
 {
 	// TODO: 在此添加控件通知处理程序代码
-	//CString m_path;
-	//CFileDialog hFileDlg(TRUE, NULL, NULL, OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST | OFN_READONLY,
-	//	TEXT("支持的图像文件 (*.jpg;*.gif;*.bmp;...)|*.jpg;*.gif;*.bmp|专用Tiff图像文件(*.tiff;*.tif)|*.tiff;*.tif|所有文件(*.*)|*.*||"), NULL);
-	//hFileDlg.m_ofn.nFilterIndex = 1;
-	//hFileDlg.m_ofn.hwndOwner = m_hWnd;
-	//hFileDlg.m_ofn.lStructSize = sizeof(OPENFILENAME);
-	//hFileDlg.m_ofn.lpstrTitle = TEXT("打开图像文件...\0");
-	//hFileDlg.m_ofn.nMaxFile = MAX_PATH;
-	//if (hFileDlg.DoModal() == IDOK)
-	//{
-	//	m_path = hFileDlg.GetPathName();
-	//	UpdateData(FALSE);
-	//}
+	CString m_path;
+	CFileDialog hFileDlg(TRUE, NULL, NULL, OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST | OFN_READONLY,
+		TEXT("支持的图像文件 (*.jpg;*.gif;*.bmp;...)|*.jpg;*.gif;*.bmp|专用Tiff图像文件(*.tiff;*.tif)|*.tiff;*.tif|所有文件(*.*)|*.*||"), NULL);
+	hFileDlg.m_ofn.nFilterIndex = 1;
+	hFileDlg.m_ofn.hwndOwner = m_hWnd;
+	hFileDlg.m_ofn.lStructSize = sizeof(OPENFILENAME);
+	hFileDlg.m_ofn.lpstrTitle = TEXT("打开图像文件...\0");
+	hFileDlg.m_ofn.nMaxFile = MAX_PATH;
+	if (hFileDlg.DoModal() == IDOK)
+	{
+		m_path = hFileDlg.GetPathName();
+		HObject Image;
+		CRect rect;
+		MFC_HALCON::MH_ReadImage(m_path, Image);
+		MFC_HALCON::MH_DispImage(Image, m_hStudyDlgWindowID);
+	}
 
-	halcon_test(&m_hStudyDlgWindowID);
+	//CString m_path("UserImages.bmp");
+
 }
 
 

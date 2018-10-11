@@ -36,11 +36,14 @@ public:
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
 
-	//菜单栏、工具栏事件响应函数
-	afx_msg void OnFileOpen();
-	afx_msg void OnCmdStart();					//开始检测
-	afx_msg void OnCmdStop();					//停止检测
-	afx_msg void OnEditStudy();					//打开学习对话框
+	////菜单栏、工具栏事件响应函数
+	//afx_msg void OnFileOpen();
+	////开始检测
+	//afx_msg void OnCmdStart();					
+	////停止检测
+	//afx_msg void OnCmdStop();					
+	////打开学习对话框
+	//afx_msg void OnEditStudy();					
 };
 
 extern CDirectionDetectApp theApp;

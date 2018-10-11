@@ -20,11 +20,25 @@ using namespace HalconCpp;
 
 BOOL halcon_test(void *p = NULL);								//全局测试函数
 
+
+struct WorkThreadFunParameters {
+
+};
+//检测挤盂方向
+unsigned int __stdcall gWorkThreadFun(PVOID pM);
+
+
+
+
+
 namespace MFC_HALCON
 {
-	LONG64 MH_OpenWindow(HWND h_wFather, CRect rect);							//打开一个halcon窗口
+//打开一个halcon窗口   参数：父窗口，在父窗口中的左上、右下位置
+	LONG64 MH_OpenWindow(HWND h_wFather, CRect rect);	
 
+//读取指定路径图像
+	BOOL MH_ReadImage(CString szpath, HObject &Image);
 
-
-
+//显示HObject图像
+	BOOL MH_DispImage(HObject &Image, HTuple wndId, CRect position =0);
 };

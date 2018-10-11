@@ -10,7 +10,7 @@
 
 #include "DirectionDetectDoc.h"
 #include "DirectionDetectView.h"
-#include "StudyDlg.h"
+#include "MfcHalcon.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -24,10 +24,10 @@ BEGIN_MESSAGE_MAP(CDirectionDetectApp, CWinAppEx)
 	// 基于文件的标准文档命令
 	ON_COMMAND(ID_FILE_NEW, &CWinAppEx::OnFileNew)
 	//ON_COMMAND(ID_FILE_OPEN, &CWinAppEx::OnFileOpen)
-	ON_COMMAND(ID_FILE_OPEN, &CDirectionDetectApp::OnFileOpen)
-	ON_COMMAND(ID_CMD_START, &CDirectionDetectApp::OnCmdStart)
-	ON_COMMAND(ID_CMD_STOP, &CDirectionDetectApp::OnCmdStop)
-	ON_COMMAND(ID_EDIT_STUDY, &CDirectionDetectApp::OnEditStudy)
+	//ON_COMMAND(ID_FILE_OPEN, &CDirectionDetectApp::OnFileOpen)
+	//ON_COMMAND(ID_CMD_START, &CDirectionDetectApp::OnCmdStart)
+	//ON_COMMAND(ID_CMD_STOP, &CDirectionDetectApp::OnCmdStop)
+	//ON_COMMAND(ID_EDIT_STUDY, &CDirectionDetectApp::OnEditStudy)
 END_MESSAGE_MAP()
 
 
@@ -135,6 +135,20 @@ BOOL CDirectionDetectApp::InitInstance()
 	if (!ProcessShellCommand(cmdInfo))
 		return FALSE;
 
+
+	//初始化住view界面  halcon窗口
+	CRect rect;
+	HWND  hwMain = GetMainWnd()->m_hWnd;
+	GetClientRect(hwMain,&rect);
+	rect.top += 100;
+	rect.left += 10;
+	rect.right = rect.right * 6 / 10;
+	rect.bottom = rect.bottom * 9/ 10;
+	CMainFrame *pMain = (CMainFrame *)AfxGetApp()->m_pMainWnd;
+	CDirectionDetectView *pView = (CDirectionDetectView *)pMain->GetActiveView();
+	pView->m_hMainViewWindowID = MFC_HALCON::MH_OpenWindow(hwMain, rect);
+
+
 	// 唯一的一个窗口已初始化，因此显示它并对其进行更新
 	m_pMainWnd->ShowWindow(SW_SHOW);
 	m_pMainWnd->UpdateWindow();
@@ -214,31 +228,38 @@ void CDirectionDetectApp::SaveCustomState()
 
 
 
-
-
-void CDirectionDetectApp::OnFileOpen()
-{
-	// TODO: 在此添加命令处理程序代码
-	CWinAppEx::OnFileOpen();
-}
-
-
-void CDirectionDetectApp::OnCmdStart()
-{
-	// TODO: 在此添加命令处理程序代码
-	int a = 0;
-}
-
-
-void CDirectionDetectApp::OnCmdStop()
-{
-	// TODO: 在此添加命令处理程序代码
-}
-
-
-void CDirectionDetectApp::OnEditStudy()
-{
-	// TODO: 在此添加命令处理程序代码
-	CStudyDlg studyDlg;
-	studyDlg.DoModal();
-}
+//
+//
+//void CDirectionDetectApp::OnFileOpen()
+//{
+//	// TODO: 在此添加命令处理程序代码
+//	CWinAppEx::OnFileOpen();
+//}
+//
+//
+//void CDirectionDetectApp::OnCmdStart()
+//{
+//	// TODO: 在此添加命令处理程序代码
+//	/*
+//	初始化
+//	创建工作线程
+//	*/
+//	HANDLE handle;
+//	//handle = (HANDLE)_beginthreadex(NULL, 0, gWorkThreadFun, NULL, 0, NULL);
+//	
+//	return;
+//}
+//
+//
+//void CDirectionDetectApp::OnCmdStop()
+//{
+//	// TODO: 在此添加命令处理程序代码
+//}
+//
+//
+//void CDirectionDetectApp::OnEditStudy()
+//{
+//	// TODO: 在此添加命令处理程序代码
+//	CStudyDlg studyDlg;
+//	studyDlg.DoModal();
+//}
