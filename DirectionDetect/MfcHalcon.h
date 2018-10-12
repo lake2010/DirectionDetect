@@ -21,8 +21,9 @@ using namespace HalconCpp;
 BOOL halcon_test(void *p = NULL);								//全局测试函数
 
 
-struct WorkThreadFunParameters {
+/*typedef*/ struct WorkThreadFunParameters {
 
+	LONG64 m_lHalconWindId = 0;
 };
 //检测挤盂方向
 unsigned int __stdcall gWorkThreadFun(PVOID pM);

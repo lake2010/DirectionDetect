@@ -72,13 +72,11 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
+ID_MAIN_ICON            ICON                    "res\\yc_fivicon.ico"
+
 IDR_MAINFRAME           ICON                    "res\\DirectionDetect.ico"
 
 IDR_DirectionDetectTYPE ICON                    "res\\DirectionDetectDoc.ico"
-
-IDI_OPEN                ICON                    "res\\打开.ico"
-
-IDI_OPENED              ICON                    "res\\打开_.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -251,14 +249,16 @@ BEGIN
     DEFPUSHBUTTON   "确定",IDOK,113,41,50,14,WS_GROUP
 END
 
-IDD_STUDY DIALOGEX 0, 0, 717, 335
+IDD_STUDY DIALOGEX 0, 0, 717, 342
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION
 CAPTION "Study"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "确定",IDOK,481,110,50,14
-    PUSHBUTTON      "取消",IDCANCEL,563,111,50,14
-    PUSHBUTTON      "打开图片",IDC_OPEN_PIC,475,20,62,23
+    DEFPUSHBUTTON   "确定设置",IDOK,514,311,62,24
+    PUSHBUTTON      "取消设置",IDCANCEL,616,311,62,24
+    PUSHBUTTON      "打开图片",IDC_OPEN_PIC,501,7,62,23
+    LTEXT           "曝光值：",IDC_STATIC,503,95,32,9
+    EDITTEXT        IDC_EDIT1,545,92,40,14,ES_AUTOHSCROLL
 END
 
 
@@ -322,7 +322,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 710
         TOPMARGIN, 7
-        BOTTOMMARGIN, 328
+        BOTTOMMARGIN, 335
     END
 END
 #endif    // APSTUDIO_INVOKED

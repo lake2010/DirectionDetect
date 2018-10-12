@@ -151,6 +151,13 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	//CMFCToolBar::SetBasicCommands(lstBasicCommands);
 
+
+	//设置标题栏and 任务栏 图标
+	HICON m_hIcon = AfxGetApp()->LoadIcon(ID_MAIN_ICON);
+	SetIcon(m_hIcon, TRUE);
+	SetIcon(m_hIcon, FALSE);
+
+
 	return 0;
 }
 
@@ -160,7 +167,9 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 		return FALSE;
 	// TODO: 在此处通过修改
 	//  CREATESTRUCT cs 来修改窗口类或样式
-
+	//更改标题栏字符串
+	cs.style &= ~FWS_ADDTOTITLE;
+	cs.lpszName = _T("FIVISION");
 	return TRUE;
 }
 

@@ -19,6 +19,12 @@
     <Filter Include="halcon">
       <UniqueIdentifier>{3fcfcba8-e79d-4195-bae4-06a4bcb53d2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="INI">
+      <UniqueIdentifier>{b23e1fde-850c-4249-84ea-00f188e5e409}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RS232/485">
+      <UniqueIdentifier>{6d4f2c88-cbee-4613-bc04-321cf4c5700f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -50,6 +56,12 @@
     </ClInclude>
     <ClInclude Include="MfcHalcon.h">
       <Filter>halcon</Filter>
+    </ClInclude>
+    <ClInclude Include="logger\Logger.h">
+      <Filter>logger</Filter>
+    </ClInclude>
+    <ClInclude Include="logger\StaticLogger.h">
+      <Filter>logger</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +118,9 @@
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="res\mainfram.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\yc_fivicon.ico">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

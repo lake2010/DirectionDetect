@@ -41,7 +41,7 @@ BOOL CStudyDlg::OnInitDialog()
 	// TODO:  在此添加额外的初始化
 	//初始化halcon窗口
 	CRect rect;
-	GetWindowRect(&rect);
+	GetClientRect(&rect);
 	rect.right = rect.right*6/10;
 	m_hStudyDlgWindowID =  MFC_HALCON::MH_OpenWindow(m_hWnd, rect);
 
@@ -68,9 +68,6 @@ void CStudyDlg::OnClickedOpenPic()
 		MFC_HALCON::MH_ReadImage(m_path, Image);
 		MFC_HALCON::MH_DispImage(Image, m_hStudyDlgWindowID);
 	}
-
-	//CString m_path("UserImages.bmp");
-
 }
 
 

@@ -14,16 +14,20 @@ protected: // 仅从序列化创建
 // 特性
 public:
 	CDirectionDetectDoc* GetDocument() const;
-
+	UINT_PTR m_lTimer;
+	LONG64 m_hMainViewWindowID;							//主界面halcon window ID
+	CRect m_rect;
 // 操作
 public:
+	void setHaloconWindRect();
+
 
 // 重写
 public:
 	virtual void OnDraw(CDC* pDC);  // 重写以绘制该视图
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 protected:
-
+	
 // 实现
 public:
 	virtual ~CDirectionDetectView();
@@ -34,7 +38,7 @@ public:
 
 protected:
 public:
-	LONG64 m_hMainViewWindowID;							//主界面halcon window ID
+
 
 // 生成的消息映射函数
 protected:
@@ -49,6 +53,8 @@ public://菜单栏、工具栏事件响应函数
 	afx_msg void OnCmdStop();
 	//打开学习对话框
 	afx_msg void OnEditStudy();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 };
 
 #ifndef _DEBUG  // DirectionDetectView.cpp 中的调试版本

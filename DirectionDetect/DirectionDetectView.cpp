@@ -29,6 +29,8 @@ BEGIN_MESSAGE_MAP(CDirectionDetectView, CView)
 	ON_COMMAND(ID_CMD_START, &CDirectionDetectView::OnCmdStart)
 	ON_COMMAND(ID_CMD_STOP, &CDirectionDetectView::OnCmdStop)
 	ON_COMMAND(ID_EDIT_STUDY, &CDirectionDetectView::OnEditStudy)
+	ON_WM_TIMER()
+	ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 // CDirectionDetectView 构造/析构
@@ -36,7 +38,7 @@ END_MESSAGE_MAP()
 CDirectionDetectView::CDirectionDetectView()
 {
 	// TODO: 在此处添加构造代码
-
+	m_hMainViewWindowID = 0;
 }
 
 CDirectionDetectView::~CDirectionDetectView()
@@ -47,8 +49,7 @@ BOOL CDirectionDetectView::PreCreateWindow(CREATESTRUCT& cs)
 {
 	// TODO: 在此处通过修改
 	//  CREATESTRUCT cs 来修改窗口类或样式
-
-
+	
 	return CView::PreCreateWindow(cs);
 }
 
@@ -100,7 +101,7 @@ CDirectionDetectDoc* CDirectionDetectView::GetDocument() const // 非调试版本是内
 
 
 // CDirectionDetectView 消息处理程序
-
+WorkThreadFunParameters g_WorkThreadFunParameter;
 
 void CDirectionDetectView::OnCmdStart()
 {
@@ -110,8 +111,8 @@ void CDirectionDetectView::OnCmdStart()
 	创建工作线程
 	*/
 	HANDLE handle;
-	//handle = (HANDLE)_beginthreadex(NULL, 0, gWorkThreadFun, NULL, 0, NULL);
-
+	g_WorkThreadFunParameter.m_lHalconWindId = m_hMainViewWindowID;
+	handle = (HANDLE)_beginthreadex(NULL, 0, gWorkThreadFun, &g_WorkThreadFunParameter, 0, NULL);
 	return;
 }
 
@@ -128,3 +129,42 @@ void CDirectionDetectView::OnEditStudy()
 	CStudyDlg studyDlg;
 	studyDlg.DoModal();
 }
+
+
+void CDirectionDetectView::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	//初始化住view界面  halcon窗口
+	setHaloconWindRect();
+	m_hMainViewWindowID = MFC_HALCON::MH_OpenWindow(m_hWnd, m_rect);
+
+	KillTimer(m_lTimer);
+	CView::OnTimer(nIDEvent);
+}
+
+
+void CDirectionDetectView::OnSize(UINT nType, int cx, int cy)
+{
+	CView::OnSize(nType, cx, cy);
+	// TODO: 在此处添加消息处理程序代码
+	//更改halcon窗口大小
+	if (0 != m_hMainViewWindowID)
+	{
+		//HalconCpp::CloseWindow(m_hMainViewWindowID);
+		//m_hMainViewWindowID = MFC_HALCON::MH_OpenWindow(m_hWnd, m_rect);
+		setHaloconWindRect();
+		HalconCpp::SetWindowExtents(m_hMainViewWindowID, m_rect.top, m_rect.left, m_rect.Width(), m_rect.Height());
+	}
+}
+
+
+void CDirectionDetectView::setHaloconWindRect()
+{
+	GetClientRect(m_rect);
+	m_rect.top += 10;
+	m_rect.left += 10;
+	m_rect.right = m_rect.right * 6 / 10;
+	m_rect.bottom = m_rect.bottom;
+}
+
+

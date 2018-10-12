@@ -18,6 +18,7 @@ BOOL halcon_test(void* p)
 
 unsigned int __stdcall gWorkThreadFun(PVOID pM)
 {
+	return 0;
 	/*工作流程
 	初始化相机
 	检测是否退出循环
@@ -33,27 +34,31 @@ unsigned int __stdcall gWorkThreadFun(PVOID pM)
 
 	释放相机
 	*/
+	WorkThreadFunParameters *pWorkThreadFunParameters = (WorkThreadFunParameters *)pM;
 	HTuple hv_AcqHandle;//相机句柄
 	OpenFramegrabber("GigEVision", 0, 0, 0, 0, 0, 0, "default", -1, "default", -1,
 		"false", "default", "c42f90f1c384_Hikvision_MVCA00330GM", 0, -1, &hv_AcqHandle);
 	GrabImageStart(hv_AcqHandle, -1);
 
+	bool isNotSetPart = TRUE;
 	HObject ho_Image;//拍照图像
 	while (true)
 	{
 		GrabImageAsync(&ho_Image, hv_AcqHandle, -1);
+		if (isNotSetPart)
+		{
+			HTuple w, h;
+			GetImageSize(ho_Image, &w, &h);
 
+			SetPart(pWorkThreadFunParameters->m_lHalconWindId, 0, 0, h, w);
+			isNotSetPart = FALSE;
+		}
 
-
+		DispObj(ho_Image, pWorkThreadFunParameters->m_lHalconWindId);
 	}
-
 	CloseFramegrabber(hv_AcqHandle);
 	return 0;
 }
-
-
-
-
 
 
 
@@ -78,7 +83,7 @@ BOOL MFC_HALCON::MH_ReadImage(CString szpath, HObject &Image) {
 	chPath[len] = '\0';//不要忽略末尾结束标志
 	HTuple path(chPath);
 	ReadImage(&Image, path);//
-	
+	return 0;
 }
 
 BOOL MFC_HALCON::MH_DispImage(HObject &Image, HTuple wndId, CRect position) {
