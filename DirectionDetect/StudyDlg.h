@@ -10,7 +10,7 @@ class CStudyDlg : public CDialogEx
 public:
 	CStudyDlg(CWnd* pParent = NULL);   // 标准构造函数
 	virtual ~CStudyDlg();
-
+private:
 // 对话框数据
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_STUDY };
@@ -26,4 +26,6 @@ protected:
 public:
 	afx_msg void OnClickedOpenPic();
 	virtual BOOL OnInitDialog();
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+	virtual void OnOK();
 };

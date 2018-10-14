@@ -31,23 +31,34 @@
 #define ID_VIEW_APPLOOK_WINDOWS_7       219
 #define IDS_EDIT_MENU                   306
 #define IDD_STUDY                       315
+#define IDD_STUDY1                      316
+#define IDD_STUDY1_P0                   320
+#define IDD_STUDY1_P1                   321
+#define IDD_STUDY1_P2                   322
+#define IDD_STUDY1_P3                   323
+#define IDD_STUDY1_P4                   324
 #define IDC_BUTTON1                     1000
 #define IDC_OPEN_PIC                    1000
 #define IDC_SLIDER1                     1001
+#define IDC_NEXT_STUDY                  1001
 #define IDC_EDIT1                       1002
+#define IDC_STUDY_TAB                   1004
+#define IDC_COMBO1                      1005
 #define ID_EDIT_STUDY                   32771
 #define ID_32772                        32772
 #define ID_32773                        32773
 #define ID_CMD_START                    32774
 #define ID_CMD_STOP                     32775
+#define ID_Menu                         32776
+#define ID_CMD_NEXT_STEP                32777
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        319
-#define _APS_NEXT_COMMAND_VALUE         32776
-#define _APS_NEXT_CONTROL_VALUE         1003
+#define _APS_NEXT_RESOURCE_VALUE        322
+#define _APS_NEXT_COMMAND_VALUE         32780
+#define _APS_NEXT_CONTROL_VALUE         1006
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

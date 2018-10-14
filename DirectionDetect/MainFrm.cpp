@@ -6,13 +6,15 @@
 #include "DirectionDetect.h"
 
 #include "MainFrm.h"
+#include "logger\StaticLogger.h"
+extern CStaticLogger g_logger;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 // CMainFrame
-
+#define IS_DISABLE_MENU//隐藏关闭菜单、工具栏禁用功能
 IMPLEMENT_DYNCREATE(CMainFrame, CFrameWndEx)
 
 const int  iMaxUserToolbars = 10;
@@ -25,6 +27,11 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWndEx)
 	ON_REGISTERED_MESSAGE(AFX_WM_CREATETOOLBAR, &CMainFrame::OnToolbarCreateNew)
 	ON_COMMAND_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnApplicationLook)
 	ON_UPDATE_COMMAND_UI_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnUpdateApplicationLook)
+	ON_UPDATE_COMMAND_UI(ID_CMD_START, &CMainFrame::OnUpdateCmdStart)
+	ON_UPDATE_COMMAND_UI(ID_CMD_STOP, &CMainFrame::OnUpdateCmdStop)
+	ON_UPDATE_COMMAND_UI(ID_EDIT_STUDY, &CMainFrame::OnUpdateEditStudy)
+	ON_UPDATE_COMMAND_UI(ID_APP_EXIT, &CMainFrame::OnUpdateAppExit)
+	ON_UPDATE_COMMAND_UI(ID_FILE_OPEN, &CMainFrame::OnUpdateFileOpen)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -41,6 +48,11 @@ CMainFrame::CMainFrame()
 {
 	// TODO: 在此添加成员初始化代码
 	theApp.m_nAppLook = theApp.GetInt(_T("ApplicationLook"), ID_VIEW_APPLOOK_VS_2008);
+	//for (int i = 0; i < 50; i++) {
+	//	m_MenuUiStatusMap[i] = 0;
+	//}
+	////enableMenu(3, 0, 2, 8);
+	//enableMenu(2, 0, 2);
 }
 
 CMainFrame::~CMainFrame()
@@ -87,6 +99,14 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	// 允许用户定义的工具栏操作: 
 	InitUserToolbars(NULL, uiFirstUserToolBarId, uiLastUserToolBarId);
 
+	//初始化需要禁用启用的菜单项添加入map，启用1 禁用0  
+	m_MenuUiStatusMap[ID_CMD_START] = 1;
+	m_MenuUiStatusMap[ID_CMD_STOP] = 0;
+	m_MenuUiStatusMap[ID_APP_EXIT] = 1;
+	m_MenuUiStatusMap[ID_FILE_OPEN] = 1;
+	m_MenuUiStatusMap[ID_EDIT_STUDY] = 1;
+	
+	
 	if (!m_wndStatusBar.Create(this))
 	{
 		TRACE0("未能创建状态栏\n");
@@ -148,7 +168,6 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	//lstBasicCommands.AddTail(ID_VIEW_APPLOOK_OFF_2007_BLACK);
 	//lstBasicCommands.AddTail(ID_VIEW_APPLOOK_OFF_2007_AQUA);
 	//lstBasicCommands.AddTail(ID_VIEW_APPLOOK_WINDOWS_7);
-
 	//CMFCToolBar::SetBasicCommands(lstBasicCommands);
 
 
@@ -321,3 +340,73 @@ BOOL CMainFrame::LoadFrame(UINT nIDResource, DWORD dwDefaultStyle, CWnd* pParent
 	return TRUE;
 }
 
+
+
+
+void CMainFrame::enableMenu(unsigned int prametersNum, ...) {
+	va_list args;
+	va_start(args, prametersNum);
+	while (prametersNum>0)
+	{
+		//通过va_arg(args,int)依次获取参数的值
+		m_MenuUiStatusMap[va_arg(args, int)] = 1;
+		prametersNum--;
+	}
+	va_end(args);
+	return;
+}
+void CMainFrame::disableMenu(unsigned int prametersNum, ...) {
+	va_list args;
+	va_start(args, prametersNum);
+	while (prametersNum>0)
+	{
+		//通过va_arg(args,int)依次获取参数的值
+		m_MenuUiStatusMap[va_arg(args, int)] = 0;
+		prametersNum--;
+	}
+	va_end(args);
+	return;
+}
+void CMainFrame::changeMenuUiStatus(CCmdUI *pCmdUI, unsigned int menuIndex) {
+#ifdef IS_DISABLE_MENU
+	if (0 == m_MenuUiStatusMap[menuIndex]) {
+		pCmdUI->Enable(0);
+		//g_logger->Log(ILogger::LogLevel::LL_DEBUG, _T("禁用--%d"), pCmdUI->m_nIndex);
+	}
+	else if (1 == m_MenuUiStatusMap[menuIndex])
+	{
+		pCmdUI->Enable(1);
+		//g_logger->Log(ILogger::LogLevel::LL_DEBUG, _T("启用==%d"), pCmdUI->m_nIndex);
+	}
+#endif 
+}
+
+
+void CMainFrame::OnUpdateCmdStart(CCmdUI *pCmdUI)
+{
+	changeMenuUiStatus(pCmdUI, pCmdUI->m_nID);
+}
+
+
+void CMainFrame::OnUpdateCmdStop(CCmdUI *pCmdUI)
+{
+	changeMenuUiStatus(pCmdUI, pCmdUI->m_nID);
+}
+
+
+void CMainFrame::OnUpdateAppExit(CCmdUI *pCmdUI)
+{
+	changeMenuUiStatus(pCmdUI, pCmdUI->m_nID);
+}
+
+
+void CMainFrame::OnUpdateEditStudy(CCmdUI *pCmdUI)
+{
+	changeMenuUiStatus(pCmdUI, pCmdUI->m_nID);
+}
+
+
+void CMainFrame::OnUpdateFileOpen(CCmdUI *pCmdUI)
+{
+	changeMenuUiStatus(pCmdUI, pCmdUI->m_nID);
+}

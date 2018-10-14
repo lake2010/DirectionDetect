@@ -29,6 +29,7 @@ void CStudyDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CStudyDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_OPEN_PIC, &CStudyDlg::OnClickedOpenPic)
+	ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 
@@ -39,10 +40,14 @@ BOOL CStudyDlg::OnInitDialog()
 	CDialogEx::OnInitDialog();
 
 	// TODO:  在此添加额外的初始化
+	//ShowWindow(SW_MAXIMIZE);//对话框默认最大化弹出
+
+
 	//初始化halcon窗口
 	CRect rect;
 	GetClientRect(&rect);
 	rect.right = rect.right*6/10;
+	rect.bottom = rect.bottom - 120;
 	m_hStudyDlgWindowID =  MFC_HALCON::MH_OpenWindow(m_hWnd, rect);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -71,3 +76,19 @@ void CStudyDlg::OnClickedOpenPic()
 }
 
 
+
+
+void CStudyDlg::OnSize(UINT nType, int cx, int cy)
+{
+	CDialogEx::OnSize(nType, cx, cy);
+
+	// TODO: 在此处添加消息处理程序代码
+}
+
+
+void CStudyDlg::OnOK()
+{
+	// TODO: 在此添加专用代码和/或调用基类
+
+	CDialogEx::OnOK();
+}

@@ -10,6 +10,10 @@ class CDirectionDetectView : public CView
 protected: // 仅从序列化创建
 	CDirectionDetectView();
 	DECLARE_DYNCREATE(CDirectionDetectView)
+// 操作
+public:
+	void setHaloconWindRect();
+private:
 
 // 特性
 public:
@@ -17,10 +21,8 @@ public:
 	UINT_PTR m_lTimer;
 	LONG64 m_hMainViewWindowID;							//主界面halcon window ID
 	CRect m_rect;
-// 操作
-public:
-	void setHaloconWindRect();
-
+private:
+	
 
 // 重写
 public:
@@ -36,9 +38,6 @@ public:
 	virtual void Dump(CDumpContext& dc) const;
 #endif
 
-protected:
-public:
-
 
 // 生成的消息映射函数
 protected:
@@ -53,8 +52,10 @@ public://菜单栏、工具栏事件响应函数
 	afx_msg void OnCmdStop();
 	//打开学习对话框
 	afx_msg void OnEditStudy();
+	//延时后初始化界面相关
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnFileOpen();
 };
 
 #ifndef _DEBUG  // DirectionDetectView.cpp 中的调试版本

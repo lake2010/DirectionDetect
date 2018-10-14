@@ -25,6 +25,12 @@
     <Filter Include="RS232/485">
       <UniqueIdentifier>{6d4f2c88-cbee-4613-bc04-321cf4c5700f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="studyDlg">
+      <UniqueIdentifier>{1cc1545a-3aba-4ff8-8776-034fe13addad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="studyDlg1">
+      <UniqueIdentifier>{622ccfbb-b0c7-4bf9-aeb0-64459cb7d360}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -51,9 +57,6 @@
     <ClInclude Include="Resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="StudyDlg.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="MfcHalcon.h">
       <Filter>halcon</Filter>
     </ClInclude>
@@ -62,6 +65,30 @@
     </ClInclude>
     <ClInclude Include="logger\StaticLogger.h">
       <Filter>logger</Filter>
+    </ClInclude>
+    <ClInclude Include="StudyDlg.h">
+      <Filter>studyDlg</Filter>
+    </ClInclude>
+    <ClInclude Include="StudyDlg1.h">
+      <Filter>studyDlg1</Filter>
+    </ClInclude>
+    <ClInclude Include="StudyDlgTabPage0.h">
+      <Filter>studyDlg1</Filter>
+    </ClInclude>
+    <ClInclude Include="StudyDlgTabPage1.h">
+      <Filter>studyDlg1</Filter>
+    </ClInclude>
+    <ClInclude Include="StudyDlgTabPage2.h">
+      <Filter>studyDlg1</Filter>
+    </ClInclude>
+    <ClInclude Include="StudyDlgTabPage3.h">
+      <Filter>studyDlg1</Filter>
+    </ClInclude>
+    <ClInclude Include="StudyDlgTabPage4.h">
+      <Filter>studyDlg1</Filter>
+    </ClInclude>
+    <ClInclude Include="Ini.h">
+      <Filter>INI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,11 +107,32 @@
     <ClCompile Include="DirectionDetectView.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="StudyDlg.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="MfcHalcon.cpp">
       <Filter>halcon</Filter>
+    </ClCompile>
+    <ClCompile Include="StudyDlg.cpp">
+      <Filter>studyDlg</Filter>
+    </ClCompile>
+    <ClCompile Include="StudyDlg1.cpp">
+      <Filter>studyDlg1</Filter>
+    </ClCompile>
+    <ClCompile Include="StudyDlgTabPage0.cpp">
+      <Filter>studyDlg1</Filter>
+    </ClCompile>
+    <ClCompile Include="StudyDlgTabPage1.cpp">
+      <Filter>studyDlg1</Filter>
+    </ClCompile>
+    <ClCompile Include="StudyDlgTabPage2.cpp">
+      <Filter>studyDlg1</Filter>
+    </ClCompile>
+    <ClCompile Include="StudyDlgTabPage3.cpp">
+      <Filter>studyDlg1</Filter>
+    </ClCompile>
+    <ClCompile Include="StudyDlgTabPage4.cpp">
+      <Filter>studyDlg1</Filter>
+    </ClCompile>
+    <ClCompile Include="Ini.cpp">
+      <Filter>INI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

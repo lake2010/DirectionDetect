@@ -11,16 +11,17 @@
 
 #include "DirectionDetectDoc.h"
 #include "DirectionDetectView.h"
-#include "StudyDlg.h"
+#include "StudyDlg1.h"
 #include "MfcHalcon.h"
+#include "logger\StaticLogger.h"
+#include "MainFrm.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 
-// CDirectionDetectView
-
+extern CStaticLogger g_logger;
 IMPLEMENT_DYNCREATE(CDirectionDetectView, CView)
 
 BEGIN_MESSAGE_MAP(CDirectionDetectView, CView)
@@ -31,6 +32,11 @@ BEGIN_MESSAGE_MAP(CDirectionDetectView, CView)
 	ON_COMMAND(ID_EDIT_STUDY, &CDirectionDetectView::OnEditStudy)
 	ON_WM_TIMER()
 	ON_WM_SIZE()
+	//ON_UPDATE_COMMAND_UI(ID_CMD_START, &CDirectionDetectView::OnUpdateCmdStart)
+	//ON_UPDATE_COMMAND_UI(ID_CMD_STOP, &CDirectionDetectView::OnUpdateCmdStop)
+	//ON_UPDATE_COMMAND_UI(ID_EDIT_STUDY, &CDirectionDetectView::OnUpdateEditStudy)
+	//ON_UPDATE_COMMAND_UI(ID_APP_EXIT, &CDirectionDetectView::OnUpdateAppExit)
+	ON_COMMAND(ID_FILE_OPEN, &CDirectionDetectView::OnFileOpen)
 END_MESSAGE_MAP()
 
 // CDirectionDetectView 构造/析构
@@ -39,6 +45,7 @@ CDirectionDetectView::CDirectionDetectView()
 {
 	// TODO: 在此处添加构造代码
 	m_hMainViewWindowID = 0;
+
 }
 
 CDirectionDetectView::~CDirectionDetectView()
@@ -100,36 +107,6 @@ CDirectionDetectDoc* CDirectionDetectView::GetDocument() const // 非调试版本是内
 #endif //_DEBUG
 
 
-// CDirectionDetectView 消息处理程序
-WorkThreadFunParameters g_WorkThreadFunParameter;
-
-void CDirectionDetectView::OnCmdStart()
-{
-	// TODO: 在此添加命令处理程序代码
-	/*
-	初始化
-	创建工作线程
-	*/
-	HANDLE handle;
-	g_WorkThreadFunParameter.m_lHalconWindId = m_hMainViewWindowID;
-	handle = (HANDLE)_beginthreadex(NULL, 0, gWorkThreadFun, &g_WorkThreadFunParameter, 0, NULL);
-	return;
-}
-
-
-void CDirectionDetectView::OnCmdStop()
-{
-	// TODO: 在此添加命令处理程序代码
-}
-
-
-void CDirectionDetectView::OnEditStudy()
-{
-	// TODO: 在此添加命令处理程序代码
-	CStudyDlg studyDlg;
-	studyDlg.DoModal();
-}
-
 
 void CDirectionDetectView::OnTimer(UINT_PTR nIDEvent)
 {
@@ -168,3 +145,46 @@ void CDirectionDetectView::setHaloconWindRect()
 }
 
 
+
+
+// CDirectionDetectView 消息处理程序
+WorkThreadFunParameters g_WorkThreadFunParameter;
+
+void CDirectionDetectView::OnCmdStart()
+{
+	/*
+	控件禁用启用
+	初始化
+	创建工作线程
+	*/
+	((CMainFrame*)::AfxGetMainWnd())->enableMenu(1, ID_CMD_STOP);
+	((CMainFrame*)::AfxGetMainWnd())->disableMenu(4, ID_CMD_START, ID_APP_EXIT, ID_FILE_OPEN, ID_EDIT_STUDY);
+	HANDLE handle;
+	g_WorkThreadFunParameter.m_lHalconWindId = m_hMainViewWindowID;
+	handle = (HANDLE)_beginthreadex(NULL, 0, gWorkThreadFun, &g_WorkThreadFunParameter, 0, NULL);
+	return;
+}
+
+
+void CDirectionDetectView::OnCmdStop()
+{
+	((CMainFrame*)::AfxGetMainWnd())->enableMenu(4, ID_CMD_START, ID_APP_EXIT, ID_FILE_OPEN, ID_EDIT_STUDY);
+	((CMainFrame*)::AfxGetMainWnd())->disableMenu(1, ID_CMD_STOP);
+
+}
+
+
+void CDirectionDetectView::OnEditStudy()
+{
+	// TODO: 在此添加命令处理程序代码
+	CStudyDlg1 studyDlg;
+	studyDlg.DoModal();
+}
+
+
+
+
+void CDirectionDetectView::OnFileOpen()
+{
+	// TODO: 在此添加命令处理程序代码
+}
