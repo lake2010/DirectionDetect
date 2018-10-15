@@ -14,6 +14,10 @@
 //	using namespace HalconCpp;
 
 
+//办公室电脑halcon路径  D:\program\halcon
+//个人电脑halcon路径		F:\program files\HALCON
+
+
 #include "Halconcpp.h"
 using namespace HalconCpp;
 
